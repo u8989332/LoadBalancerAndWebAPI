@@ -1,0 +1,17 @@
+{
+  "BalancerSettings": {
+    "BalancingAlgorithm": "Random",
+    "Instances": [
+      {
+        "ip": "localhost",
+        "port": 5000,
+        "weight": 1
+      },
+      {
+        "ip": "localhost",
+        "port": 5001,
+        "weight": 2
+      }
+    ]
+  }
+}
