@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileWebApi", "FileWebApi\FileWebApi.csproj", "{00EF999B-3AED-4ADD-BA5B-3D81B2002045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWebApi.Tests", "FileWebApi.Tests\FileWebApi.Tests.csproj", "{0ACAACFD-9E09-4A56-A4AA-09ED78851FF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileWebApi.Tests", "FileWebApi.Tests\FileWebApi.Tests.csproj", "{0ACAACFD-9E09-4A56-A4AA-09ED78851FF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{13BEE57B-3DE8-48A2-962D-C91C66A594AA}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
