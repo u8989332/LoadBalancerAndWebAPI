@@ -6,7 +6,7 @@
     /// <summary>
     /// A factory to select a target server.
     /// </summary>
-    public class LoadBalancerFactory
+    public class LoadBalancerFactory : ILoadBalancerFactory
     {
         /// <summary>
         /// Weighted Round Robin Algorithm Name.

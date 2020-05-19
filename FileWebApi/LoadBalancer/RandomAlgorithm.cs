@@ -22,13 +22,18 @@
         /// <returns>The <see cref="InstanceTarget"/>.</returns>
         public override InstanceTarget GetInstance()
         {
-            int randomIndex = new Random().Next(0, _instances.Length);
+            int randomIndex = GetInstanceRandomIndex(_instances.Length);
             var randomInstance = _instances[randomIndex];
             return new InstanceTarget
             {
                 Ip = randomInstance.Ip,
                 Port = randomInstance.Port
             };
+        }
+
+        protected virtual int GetInstanceRandomIndex(int instanceLength)
+        {
+            return new Random().Next(0, instanceLength);
         }
     }
 }

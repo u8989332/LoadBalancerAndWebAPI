@@ -5,8 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using System;
-    using System.Collections.Concurrent;
-    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -24,17 +22,26 @@
         /// <summary>
         /// Load-Balancer factory.
         /// </summary>
-        private readonly LoadBalancerFactory _loadBalancerFactory;
+        private readonly ILoadBalancerFactory _loadBalancerFactory;
+
+        /// <summary>
+        /// File http client for accessing files.
+        /// </summary>
+        private readonly IFileHttpClient _fileHttpClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileController"/> class.
         /// </summary>
         /// <param name="logger">The logger<see cref="ILogger{FileController}"/>.</param>
-        /// <param name="loadBalancerFactory">Load-Balancer factory<see cref="LoadBalancerFactory"/>.</param>
-        public FileController(ILogger<FileController> logger, LoadBalancerFactory loadBalancerFactory)
+        /// <param name="loadBalancerFactory">Load-Balancer factory<see cref="ILoadBalancerFactory"/>.</param>
+        public FileController(
+            ILogger<FileController> logger,
+            ILoadBalancerFactory loadBalancerFactory,
+            IFileHttpClient fileHttpClient)
         {
             _logger = logger;
             _loadBalancerFactory = loadBalancerFactory;
+            _fileHttpClient = fileHttpClient;
         }
 
         /// <summary>
@@ -55,9 +62,8 @@
             {
                 // get target file server
                 var loadBalanceTarget = _loadBalancerFactory.GetInstance();
-                var client = new FakeFileHttpClient();
                 // get file by fake file server. In the real world, it should call HttpClient or other web services.
-                var result = await client.GetAsync(loadBalanceTarget.Ip + ":" + loadBalanceTarget.Port.ToString(), uri);
+                var result = await _fileHttpClient.GetAsync(loadBalanceTarget.Ip + ":" + loadBalanceTarget.Port.ToString(), uri);
                 return File(result.Content, "application/octet-stream", result.FileName);
             }
             catch (Exception ex)

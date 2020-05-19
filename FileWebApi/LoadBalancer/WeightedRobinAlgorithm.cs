@@ -22,8 +22,15 @@
         /// Initializes a new instance of the <see cref="WeightedRobinAlgorithm"/> class.
         /// </summary>
         /// <param name="instances">Target server list<see cref="Instance[]"/>.</param>
-        public WeightedRobinAlgorithm(Instance[] instances) : base(instances)
+        public WeightedRobinAlgorithm(Instance[] instances, bool isResetIndex = false) : base(instances)
         {
+            if(isResetIndex == true)
+            {
+                lock (lockKey)
+                {
+                    pos = 0;
+                }
+            }
         }
 
         /// <summary>

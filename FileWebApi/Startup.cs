@@ -1,5 +1,7 @@
 namespace FileWebApi
 {
+    using FileWebApi.Common;
+    using FileWebApi.FileServices;
     using FileWebApi.LoadBalancer;
     using FileWebApi.Models;
     using Microsoft.AspNetCore.Builder;
@@ -55,7 +57,11 @@ namespace FileWebApi
             services.Configure<LoadBalancerSettings>(Configuration.GetSection("BalancerSettings"));
 
             // can't not use singleton because of IOptionSnapshot registered with Scoped lifetime
-            services.AddScoped<LoadBalancerFactory>();
+            services.AddScoped<ILoadBalancerFactory, LoadBalancerFactory>();
+
+            services.AddTransient<IFileHttpClient, FakeFileHttpClient>();
+            services.AddTransient<IFileService, FakeFileService>();
+            services.AddTransient<IRandomGenerator, RandomGenerator>();
         }
 
         /// <summary>

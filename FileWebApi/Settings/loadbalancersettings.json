@@ -1,6 +1,6 @@
 {
   "BalancerSettings": {
-    "BalancingAlgorithm": "Random",
+    "BalancingAlgorithm": "WeightedRobin",
     "Instances": [
       {
         "ip": "localhost",
